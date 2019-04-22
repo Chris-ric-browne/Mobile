@@ -19,7 +19,7 @@ var app = function(app) {  // module pattern
         // v.dial = new Dial().sca(2).center(content);
         // v.dial.currentValue = m.data[0];
         // var button = new Button({width:200,height:100,label:"START"}).center().addTo(page1);
-          var label = new Label({text:"Enter a vowel then watch as the colors change !!!!"}).addTo(content).center().mov(0,-50);
+          var label = new Label({text:"Enter a vowel "}).addTo(content).center().mov(0,-50);
 
         let footer = v.page1.tabs = new Tabs({
 
@@ -84,30 +84,30 @@ var app = function(app) {  // module pattern
         textArea.on("input", function() {
           if(textArea.text == "A" || textArea.text == "a")
           {
-            textArea.removeFrom();
+            // textArea.removeFrom();
             label.removeFrom();
             A();
 
-            var button = new Button(200,50,"CLEAR").addTo(content).center().mov(0,50);
-
-            button.on("click", function(){
-              // text();
-            // var c = 1;
-
-            });
+            // var button = new Button(200,50,"CLEAR").addTo(content).center().mov(0,50);
+            //
+            // button.on("click", function(){
+            //   // text();
+            // // var c = 1;
+            //
+            // });
           }
           else if (textArea == "E" || textArea.text == "e")
           {
-            textArea.removeFrom();
+            // textArea.removeFrom();
             label.removeFrom();
             E();
             var button = new Button(200,50,"CLEAR").addTo(content).center().mov(0,50);
 
-            button.on("click", function(){
-              // text();
-            // var c = 1;
-
-            });
+            // button.on("click", function(){
+            //   // text();
+            // // var c = 1;
+            //
+            // });
           }
           else if (textArea == "I" || textArea.text == "i")
           {
@@ -124,29 +124,29 @@ var app = function(app) {  // module pattern
           }
           else if (textArea == "O" || textArea.text == "o")
           {
-            textArea.removeFrom();
+            // textArea.removeFrom();
             label.removeFrom();
             O();
-            var button = new Button(200,50,"CLEAR").addTo(content).center().mov(0,50);
-
-            button.on("click", function(){
-              // text();
-            // var c = 1;
-
-            });
+            // var button = new Button(200,50,"CLEAR").addTo(content).center().mov(0,50);
+            //
+            // button.on("click", function(){
+            //   // text();
+            // // var c = 1;
+            //
+            // });
           }
           else if (textArea == "U" || textArea.text == "u")
           {
-            textArea.removeFrom();
+            // textArea.removeFrom();
             label.removeFrom();
             U();
-            var button = new Button(200,50,"CLEAR").addTo(content).center().mov(0,50);
-
-            button.on("click", function(){
-              // text();
-            // var c = 1;
-
-            });
+            // var button = new Button(200,50,"CLEAR").addTo(content).center().mov(0,50);
+            //
+            // button.on("click", function(){
+            //   // text();
+            // // var c = 1;
+            //
+            // });
           }
           else {
             label.removeFrom();
