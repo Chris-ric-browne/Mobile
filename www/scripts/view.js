@@ -18,29 +18,30 @@ var app = function(app) {  // module pattern
         let content = new Container(500, 500).addTo(page1);
         // v.dial = new Dial().sca(2).center(content);
         // v.dial.currentValue = m.data[0];
-        var button = new Button({width:200,height:100,label:"START"}).center().addTo(page1);
+        // var button = new Button({width:200,height:100,label:"START"}).center().addTo(page1);
+          var label = new Label({text:"Enter a vowel then watch as the colors change !!!!"}).addTo(content).center().mov(0,-50);
 
         let footer = v.page1.tabs = new Tabs({
 
             tabs:[new Button({
-                width:50,
-                height:50,
-                corner:15,
-                backgroundColor:purple,
+              width:70,
+            height:70,
+            corner:35,
+                backgroundColor:red,
                 rollBackgroundColor:black,
                 icon:pizzazz.makeIcon("home","white").alp(.7),
-                rollIcon:pizzazz.makeIcon("home","white"),
+              rollIcon:pizzazz.makeIcon("home","white"),
                 label:"",
                 shadowBlur:-1
             }),
             new Button({
-                width:70,
-                height:70,
-                corner:35,
-                backgroundColor:purple,
+              width:70,
+            height:70,
+            corner:35,
+                backgroundColor:red,
                 rollBackgroundColor:black,
-                icon:pizzazz.makeIcon("settings","white").alp(.7),
-                rollIcon:pizzazz.makeIcon("settings","white"),
+                icon:pizzazz.makeIcon("play","white").alp(.7),
+              rollIcon:pizzazz.makeIcon("play","white"),
                 label:"",
                 shadowBlur:-1
             })]
@@ -73,63 +74,141 @@ var app = function(app) {  // module pattern
 
         //function for A
         // A();
+        text();
+
+        function text(){
+        var label = new Label({text:"Enter a vowel"}).addTo(content).center().mov(0,-50);
 
         var textArea = new TextArea(100, 50).addTo(content).center();
 
-        // var label = new Label({text:""}).pos(20,20).addTo(content);
         textArea.on("input", function() {
           if(textArea.text == "A" || textArea.text == "a")
           {
             textArea.removeFrom();
+            label.removeFrom();
             A();
+
+            var button = new Button(200,50,"CLEAR").addTo(content).center().mov(0,50);
+
+            button.on("click", function(){
+              // text();
+            // var c = 1;
+
+            });
           }
           else if (textArea == "E" || textArea.text == "e")
           {
             textArea.removeFrom();
+            label.removeFrom();
             E();
+            var button = new Button(200,50,"CLEAR").addTo(content).center().mov(0,50);
+
+            button.on("click", function(){
+              // text();
+            // var c = 1;
+
+            });
           }
           else if (textArea == "I" || textArea.text == "i")
           {
             textArea.removeFrom();
+            label.removeFrom();
             I();
+            var button = new Button(200,50,"CLEAR").addTo(content).center().mov(0,50);
+
+            button.on("click", function(){
+              // text();
+            // var c = 1;
+
+            });
           }
           else if (textArea == "O" || textArea.text == "o")
           {
             textArea.removeFrom();
+            label.removeFrom();
             O();
+            var button = new Button(200,50,"CLEAR").addTo(content).center().mov(0,50);
+
+            button.on("click", function(){
+              // text();
+            // var c = 1;
+
+            });
+          }
+          else if (textArea == "U" || textArea.text == "u")
+          {
+            textArea.removeFrom();
+            label.removeFrom();
+            U();
+            var button = new Button(200,50,"CLEAR").addTo(content).center().mov(0,50);
+
+            button.on("click", function(){
+              // text();
+            // var c = 1;
+
+            });
+          }
+          else {
+            label.removeFrom();
+            var wrong = new Label({text:"Wrong Please Enter a vowel"}).addTo(content).center().mov(0,-80);
           }
            stage.update();
         });
 
+      }
+
         function A()
         {
-        var top = new Rectangle({width:110,height:thickness,color:green}).centerReg(holder).mov(0,-90).cur().addPhysics({linear,angular,maskBits:2}).outline();//makes box fall
-        var bot = new Rectangle({width:thickness,height:150,color:orange,corner:[20,20,20,20]}).centerReg(holder).rot(-35).cur().mov(40,-100).addPhysics({linear,angular}).outline();//makes box fall
-        var mid = new Rectangle({width:thickness,height:150,color:red,corner:[20,20,20,20]}).centerReg(holder).rot(35).cur().mov(-40,-100).addPhysics({linear,angular,maskBits:4}).outline();//makes box fall
+        var top = new Rectangle({width:110,height:thickness,color:green}).centerReg(holder).mov(0,-90).cur().addPhysics({linear,angular,maskBits:2});//makes box fall
+        var bot = new Rectangle({width:thickness,height:150,color:orange,corner:[20,20,20,20]}).centerReg(holder).rot(-35).cur().mov(40,-100).addPhysics({linear,angular});//makes box fall
+        var mid = new Rectangle({width:thickness,height:150,color:red,corner:[20,20,20,20]}).centerReg(holder).rot(35).cur().mov(-40,-100).addPhysics({linear,angular,maskBits:4});//makes box fall
 
-        // join(onj1,obj2,point1,point2,minAngle,maxAngle,type);
-        // physics.join(top , mid, new Point(top.x + top.width/2, top.y),null,0,45,"revolute" );//joins bars to make a Z
-        // physics.join(bot , mid, new Point(bot.x - bot.width/2, bot.y),null,0,45,"revolute" );
-        physics.join(mid, bot, mid.localToGlobal(0, 0), null, 0, 45, "weld");
-        physics.join(top, bot, top.localToGlobal(top.x ,top.y), null, 0, 45, "weld");
 
-        // physics.join(mid, top, new Point(mid.x + mid.width/2, mid.y), null, 0, 45, "revolute");
-      }
+        let j =  physics.join(mid, bot, new Point(mid.x + mid.width/2, mid.y), 0, 45, "weld");
+        let i =  physics.join(top, bot, new Point(top.x + top.width/2, top.y), null, 0, 45, "weld");
+
+          interval(50, function(){
+            let circle =   new Circle({min:10,max:30},[purple,pink,orange]).loc(100,100).addPhysics({restitution:1,categoryBits:2|4}).impulse(100,100).addTo(content);
+            circle.contact(function(obj, body){ ////contact is like a hit tests
+
+             if(body == top.body || body == bot.body || body == mid.body){
+                obj.color =  circle.color;
+                return;
+              }//end of if
+
+            });// end of contact
+
+          },10);//end of interval
+
+
+        }// end of function
 
       //function for E
       // E();
       function E ()
       {
-        var top = new Rectangle({width:110,height:thickness,color:green,corner:[20,20,20,20]}).centerReg(holder).mov(0,-210).cur().addPhysics({linear,angular,maskBits:2}).outline();//makes box fall
-        var bot = new Rectangle({width:110,height:thickness,color:orange,corner:[20,20,20,20]}).centerReg(holder).cur().mov(0,-100).addPhysics({linear,angular}).outline();//makes box fall
-        var mid = new Rectangle({width:110,height:thickness,color:red,corner:[20,20,20,20]}).centerReg(holder).cur().mov(0,10).addPhysics({linear,angular,maskBits:4}).outline();//makes box fall
-        var side = new Rectangle({width:thickness,height:250,color:"blue",corner:[20,20,20,20]}).centerReg(holder).cur().mov(-60,-100).addPhysics({linear,angular,maskBits:4}).outline();//makes box fall
+        var top = new Rectangle({width:110,height:thickness,color:green,corner:[20,20,20,20]}).centerReg(holder).mov(0,-210).cur().addPhysics({linear,angular,maskBits:2});//makes box fall
+        var bot = new Rectangle({width:110,height:thickness,color:orange,corner:[20,20,20,20]}).centerReg(holder).cur().mov(0,-100).addPhysics({linear,angular});//makes box fall
+        var mid = new Rectangle({width:110,height:thickness,color:red,corner:[20,20,20,20]}).centerReg(holder).cur().mov(0,10).addPhysics({linear,angular,maskBits:4});//makes box fall
+        var side = new Rectangle({width:thickness,height:250,color:"blue",corner:[20,20,20,20]}).centerReg(holder).cur().mov(-60,-100).addPhysics({linear,angular,maskBits:4});//makes box fall
 
 
         physics.join(mid, side, mid.localToGlobal(0, 0), null, 0, 45, "weld");
         physics.join(top, side, top.localToGlobal(top.x ,top.y), null, 0, 45, "weld");
         physics.join(bot, side, bot.localToGlobal(top.x ,top.y), null, 0, 45, "weld");
 
+        interval(50, function(){
+        var circle =   new Circle({min:10,max:30},[purple,pink,orange,yellow,green]).loc(100,100).addPhysics({restitution:1,categoryBits:2|4}).impulse(100,100);
+        circle.contact(function(obj, body){ ////contact is like a hit tests
+           //  if(body == rect.body)compares physics bodies //can also use onj ==  rect
+           if(body == top.body || body == bot.body || body == mid.body || body == side.body)
+             {
+              obj.color =  circle.color;
+             }
+
+          });
+          // circle.removeFrom();
+  },100);
 
 
       }
@@ -137,48 +216,70 @@ var app = function(app) {  // module pattern
       function I ()
       {
 
-        var mid = new Rectangle({width:thickness,height:150,color:red,corner:[20,20,20,20]}).centerReg(holder).cur().mov(-40,-100).addPhysics({linear,angular,maskBits:4}).outline();//makes box fall
-        var top = new Rectangle({width:150,height:thickness,color:green,corner:[20,20,20,20]}).centerReg(holder).mov(-40,-160).cur().addPhysics({linear,angular,maskBits:2}).outline();//makes box fall
-        var bot = new Rectangle({width:150,height:thickness,color:orange,corner:[20,20,20,20]}).centerReg(holder).cur().mov(-40,-40).addPhysics({linear,angular}).outline();//makes box fall
+        var mid = new Rectangle({width:thickness,height:150,color:red,corner:[20,20,20,20]}).centerReg(holder).cur().mov(-40,-100).addPhysics({linear,angular,maskBits:4});//makes box fall
+        var top = new Rectangle({width:150,height:thickness,color:green,corner:[20,20,20,20]}).centerReg(holder).mov(-40,-160).cur().addPhysics({linear,angular,maskBits:2});//makes box fall
+        var bot = new Rectangle({width:150,height:thickness,color:orange,corner:[20,20,20,20]}).centerReg(holder).cur().mov(-40,-40).addPhysics({linear,angular});//makes box fall
 
         physics.join(mid, bot, mid.localToGlobal(0, 0), null, 0, 45, "weld");
         physics.join(top, bot, top.localToGlobal(top.x ,top.y), null, 0, 45, "weld");
 
+        interval(50, function(){
+        var circle =   new Circle({min:10,max:30},[purple,pink,orange,red,blue]).loc(100,100).addPhysics({restitution:1,categoryBits:2|4}).impulse(100,100);
+        circle.contact(function(obj, body){ ////contact is like a hit tests
+           //  if(body == rect.body)compares physics bodies //can also use onj ==  rect
+           if(body == top.body || body == bot.body || body == mid.body)
+             {
+              obj.color =  circle.color;
+             }
 
+          });
+
+  },100);
       }
       // O();
       function O ()
       {
-        var top = new Circle({radius:100, color:blue, borderColor:green, borderWidth:30}).centerReg(holder).mov(0,-90).cur().addPhysics({linear,angular,maskBits:2}).outline();//makes box fall
-        // var bot = new Rectangle({width:thickness,height:150,color:orange,corner:[20,20,20,20]}).centerReg(holder).rot(-35).cur().mov(40,-100).addPhysics({linear,angular}).outline();//makes box fall
-        // var mid = new Rectangle({width:thickness,height:150,color:red,corner:[20,20,20,20]}).centerReg(holder).rot(35).cur().mov(-40,-100).addPhysics({linear,angular,maskBits:4}).outline();//makes box fall
+        var top = new Circle({radius:100, color:blue, borderColor:green, borderWidth:30}).centerReg(holder).mov(0,-90).cur().addPhysics({linear,angular,maskBits:2});//makes box fall
 
+        interval(50, function(){
+        var circle =   new Circle({min:10,max:30},[purple,pink,orange,green]).loc(100,100).addPhysics({restitution:1,categoryBits:2|4}).impulse(100,100);
+        circle.contact(function(obj, body){ ////contact is like a hit tests
+           //  if(body == rect.body)compares physics bodies //can also use onj ==  rect
+           if(body == top.body)
+             {
+              obj.borderColor =  circle.color;
+             }
 
-        // physics.join(mid, bot, mid.localToGlobal(0, 0), null, 0, 45, "weld");
-        // physics.join(top, bot, top.localToGlobal(top.x ,top.y), null, 0, 45, "weld");
-
-
+          });
+          // circle.removeFrom();
+  },100);
       }
 
       function U ()
       {
-        var top = new Rectangle({width:110,height:thickness,color:green}).centerReg(holder).mov(0,-90).cur().addPhysics({linear,angular,maskBits:2}).outline();//makes box fall
-        var bot = new Rectangle({width:thickness,height:150,color:orange,corner:[20,20,20,20]}).centerReg(holder).rot(-35).cur().mov(40,-100).addPhysics({linear,angular}).outline();//makes box fall
-        var mid = new Rectangle({width:thickness,height:150,color:red,corner:[20,20,20,20]}).centerReg(holder).rot(35).cur().mov(-40,-100).addPhysics({linear,angular,maskBits:4}).outline();//makes box fall
+
+        var bot = new Rectangle({width:thickness,height:150,color:orange,corner:[20,20,20,20]}).centerReg(holder).cur().mov(40,-100).addPhysics({linear,angular});//makes box fall
+        var mid = new Rectangle({width:thickness,height:150,color:red,corner:[20,20,20,20]}).centerReg(holder).cur().mov(-40,-100).addPhysics({linear,angular,maskBits:4});//makes box fall
+        var top = new Rectangle({width:110,height:thickness,color:green,corner:[20,20,20,20]}).centerReg(holder).mov(0,-40).cur().addPhysics({linear,angular,maskBits:2});//makes box fall
 
 
         physics.join(mid, bot, mid.localToGlobal(0, 0), null, 0, 45, "weld");
         physics.join(top, bot, top.localToGlobal(top.x ,top.y), null, 0, 45, "weld");
 
+        interval(50, function(){
+        var circle =   new Circle({min:10,max:30},[purple,pink,orange,green]).loc(100,100).addPhysics({restitution:1,categoryBits:2|4}).impulse(100,100);
+        circle.contact(function(obj, body){ ////contact is like a hit tests
+           //  if(body == rect.body)compares physics bodies //can also use onj ==  rect
+           if(body == top.body || body == mid.body || body == bot.body)
+             {
+              obj.borderColor =  circle.color;
+             }
 
+          });
+          // circle.removeFrom();
+  },100);
       }
-//         physics.remove(physics.borderRight);
-// new Rectangle(10, stageH/2 - 50).centerReg().pos(0,0,true).addPhysics(false);
-// new Rectangle(10, stageH/2 - 50).centerReg().pos(0,0,true,true).addPhysics(false);
 
-// setInterval(function(){
-
-// },1000);
 physics.drag();//lets you drag it around
 
         footer = v.page2.tabs =v.page1.tabs.clone().addTo(page2);
